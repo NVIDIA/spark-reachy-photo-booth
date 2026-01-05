@@ -1,0 +1,21 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Run app",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "",
+      "console": "internalConsole",
+      "preLaunchTask": "run app"
+    },
+    {
+      "name": "Build app",
+      "type": "debugpy",
+      "request": "launch",
+      "program": "",
+      "console": "internalConsole",
+      "preLaunchTask": "build app"
+    }
+  ]
+}

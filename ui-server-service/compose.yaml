@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+services:
+  ui-server:
+    restart: unless-stopped
+    container_name: ui-server
+    image: ui-server:latest
+    depends_on:
+      redpanda:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: rebuild
+          path: ./pyproject.toml
+        - action: sync+restart
+          path: ./src
+          target: /app/src
+    build:
+      context: ..
+      dockerfile: ui-server-service/Dockerfile
+    network_mode: "host"
+    configs:
+      - source: config_ui_server
+        target: /config.yaml
+configs:
+  config_ui_server:
+    content: |
+      minio_public_host: ${EXTERNAL_MINIO_BASE_URL}
+      broker_url: kafka://127.0.0.1:19092
+      otel_endpoint: http://127.0.0.1:4317
+
+

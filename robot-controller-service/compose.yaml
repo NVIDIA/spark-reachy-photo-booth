@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+services:
+  robot-controller:
+    restart: unless-stopped
+    container_name: robot-controller
+    image: robot-controller:latest
+    user: root
+    depends_on:
+      redpanda:
+        condition: service_healthy
+      agent:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: rebuild
+          path: ./pyproject.toml
+        - action: sync+restart
+          path: ./src
+          target: /app/src
+    build:
+      context: ..
+      dockerfile: robot-controller-service/Dockerfile
+      args:
+        UV_FLAGS: --dev
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://127.0.0.1:8000/api/daemon/status"]
+        start_period: 10m
+        start_interval: 5s
+        interval: 5s
+        timeout: 3s
+        retries: 5
+    ports:
+      - 8000:8000 # Reachy dashboard
+    devices:
+      - /dev/ttyACM0:/dev/ttyACM0
+      - /dev/bus/usb:/dev/bus/usb:rw # USB devices (for ReSpeaker) - with read/write
+    environment:
+      - LIBGL_ALWAYS_SOFTWARE=1
+      - GALLIUM_DRIVER=llvmpipe
+    volumes: []
+      # NOTE: Uncomment if you want to use the simulator
+      # Comment if you want to use the real robot
+      #- /tmp/.X11-unix:/tmp/.X11-unix

@@ -1,0 +1,37 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+services:
+  camera:
+    restart: unless-stopped
+    container_name: camera
+    image: camera:latest
+    depends_on:
+      redpanda:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: rebuild
+          path: ./pyproject.toml
+        - action: sync+restart
+          path: ./src
+          target: /app/src
+    build:
+      context: ..
+      dockerfile: camera-service/Dockerfile
+    ports:
+      - 7071:7071
+    devices:
+      - /dev:/dev
+    volumes:
+      - /dev:/dev
+    #configs:
+    #  - source: config_camera
+    #    target: /config.yaml
+#configs:
+#  config_camera:
+#    content: |
+#      camera_serial_or_url: <name_of_your_camera>
+#      streaming_resolution:
+#        width: 1920
+#        height: 1080

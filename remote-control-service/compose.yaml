@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+services:
+  remote-control:
+    restart: unless-stopped
+    container_name: remote-control
+    image: remote-control:latest
+    depends_on:
+      redpanda:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: rebuild
+          path: ./pyproject.toml
+        - action: sync+restart
+          path: ./src
+          target: /app/src
+    build:
+      context: ..
+      dockerfile: remote-control-service/Dockerfile
+    ports:
+      - 8888:8888
+    configs:
+      - source: config_remote_control
+        target: /config.yaml
+configs:
+  config_remote_control:
+    content: |
+      commands:
+        - Start
+        - UserAppeared
+        - UserDisappeared
+        - Listen
+        - Think
+        - Focus
+        - HumanInTheLoop
+        - TakePicture
+        - Abort

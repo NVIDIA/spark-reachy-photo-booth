@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+[project]
+name = "agent"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "workmesh",
+    "langchain-ollama>=0.3.10",
+    "nvidia-nat[langchain,phoenix]==1.3.1",
+    "photo-booth-agent",
+]
+
+[project.entry-points.'nat.plugins']
+nat_ollama = "src.plugins.ollama.register"
+
+[dependency-groups]
+dev = [
+    "typer>=0.16.1",
+]
+
+[tool.uv.sources]
+workmesh = { workspace = true }
+photo-booth-agent = { workspace = true }

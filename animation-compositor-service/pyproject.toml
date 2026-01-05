@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+[project]
+name = "animation-compositor"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "workmesh",
+    "pydub>=0.25.1",
+    "scipy==1.15.3",
+    "opentelemetry-exporter-otlp-proto-grpc>=1.15.0",
+    "sounddevice==0.5.1",
+]
+
+[tool.uv.sources]
+workmesh = { workspace = true }

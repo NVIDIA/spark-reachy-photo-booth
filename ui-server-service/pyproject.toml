@@ -1,0 +1,17 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+[project]
+name = "ui-server"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "aiortc>=1.14.0",
+    "fastapi[standard]>=0.115.14",
+    "opencv-python-headless>=4.11.0.86",
+    "websockets>=15.0.1",
+    "workmesh",
+]
+
+[tool.uv.sources]
+workmesh = { workspace = true }

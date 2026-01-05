@@ -1,0 +1,546 @@
+// Copyright 2025 NVIDIA Corporation
+// SPDX-License-Identifier: Apache-2.0
+
+syntax = "proto3";
+
+package workmesh.messages;
+
+import "google/protobuf/struct.proto";
+
+/////////////////////////////
+// Animation
+/////////////////////////////
+
+message Animation {
+    uint32 frame_rate = 1;
+    AnimationData data = 2;
+}
+
+message AnimationData {
+    repeated AnimationFrame frames = 1;
+}
+
+message AnimationFrame {
+    // Body rotation
+    optional float body_angle = 1;
+
+    // Antenna rotation
+    optional float r_antenna_angle = 2;
+    optional float l_antenna_angle = 3;
+
+    // Head position
+    optional float head_position_x = 4;
+    optional float head_position_y = 5;
+    optional float head_position_z = 6;
+
+    // Head rotation
+    optional EulerAngle head_rotation = 7;
+}
+
+message EulerAngle {
+    float roll = 1;
+    float pitch = 2;
+    float yaw = 3;
+}
+
+/////////////////////////////
+// Audio
+/////////////////////////////
+
+message Audio {
+    uint32 sample_rate = 1;
+    uint32 bits_per_sample = 2;
+    uint32 channel_count = 3;
+
+    bytes audio_buffer = 4;
+}
+
+/////////////////////////////
+// Playing clips
+/////////////////////////////
+
+// Send play request to the database
+message PlayClip {
+    string action_uuid = 1;
+    Robot robot_id = 2; // To specify which robot should play the clip
+    string clip_name = 3;
+
+    optional ClipProperties clip_properties = 4;
+    optional AnimationProperties animation_properties = 5;
+    optional AudioProperties audio_properties = 6;
+}
+
+message AnimationProperties {
+    optional uint32 priority = 1;
+    optional float opacity = 2;
+    optional Transition blending = 3;
+}
+
+message AudioProperties {
+    optional float volume = 1;
+    optional Transition fading = 2;
+}
+
+message ClipProperties {
+    optional bool loop = 1;
+    optional float loop_overlap = 2;
+}
+
+// Send clip data to compositor
+message ClipData {
+    string action_uuid = 1;
+    Robot robot_id = 2;
+
+    optional Animation animation = 3;
+    optional Audio audio = 4;
+
+    optional ClipProperties clip_properties = 5;
+    optional AnimationProperties animation_properties = 6;
+    optional AudioProperties audio_properties = 7;
+}
+
+/////////////////////////////
+// Stopping clips
+/////////////////////////////
+
+// Send UUID of clip to stop it
+message StopClip {
+    string action_uuid = 1;
+    optional float fade_out = 2;
+}
+
+/////////////////////////////
+// Changing volume
+/////////////////////////////
+
+// Send volume to change it
+message ChangeVolume {
+    string action_uuid = 1;
+    float volume = 2;
+}
+
+/////////////////////////////
+// Other
+/////////////////////////////
+
+// Clip transition. Animation: blend in and out. Audio: fade in and out.
+message Transition {
+    optional float transition_in = 1;
+    optional float transition_out = 2;
+}
+
+/////////////////////////////
+// Bounding Box
+/////////////////////////////
+
+message BoundingBox {
+    Robot robot_id = 1;
+    int32 frame_index = 2;
+    int64 timestamp = 3;
+    float top_left_x = 4;
+    float top_left_y = 5;
+    float width = 6;
+    float height = 7;
+    float score = 8;
+}
+
+/////////////////////////////
+// Clip Status
+/////////////////////////////
+
+message ClipStatus {
+    enum Status {
+        STARTED = 0; // Clip has started playing
+        UPDATED = 1; // Clip has been updated (i.e. volume change)
+        FINISHED = 2; // Clip has finished playing (normally or after being stopped)
+        ERROR = 3; // Clip has encountered an error
+    }
+
+    string action_uuid = 1;
+    Robot robot_id = 2;
+    Status status = 3;
+    uint64 timestamp = 4;
+}
+
+/////////////////////////////
+// Direction of Arrival
+/////////////////////////////
+
+message RealtimeDoA {
+    // Angle of arrival of the detected sound, in degrees.
+    // Range: -90 (left of the robot) to 90 (right of the robot), 0 = directly in front of the robot's head.
+    // The reference point is the head of the robot.
+    float angle = 1;
+
+    // Whether the reSpeaker thinks that  someone is speaking or not.
+    bool speech_detected = 2;
+}
+
+message ProcessedDoA {
+    // Angle of arrival of the detected sound, in degrees after filtering.
+    // Range: -90 (left of the robot) to 90 (right of the robot), 0 = directly in front of the robot's head.
+    // The reference point is the head of the robot.
+    float angle = 1;
+
+    // Whether the DoA is the final value after receiving the full user utterance or not.
+    bool is_final = 2;
+}
+
+/////////////////////////////
+// File Publish
+/////////////////////////////
+
+message FilePublish {
+    string action_uuid = 1;
+    int64 timestamp = 2;
+    string metadata = 3;
+    string file_url = 4;
+}
+
+/////////////////////////////
+// Frame
+/////////////////////////////
+
+enum ImageEncoding {
+    IMAGE_ENCODING_UNSPECIFIED = 0;
+    JPEG = 1;
+    PNG = 2;
+    BMP = 3;
+    RAW = 4;
+}
+
+message Frame {
+    Robot robot_id = 1;
+    int32 index = 2;
+    int64 timestamp = 3;
+    bytes data = 4;
+    ImageEncoding encoding = 5;
+}
+
+/////////////////////////////
+// Human Speech Request
+/////////////////////////////
+
+// NOTE: Different from RobotSpeechRequest.
+// This message is used to request speech from the TTS service.
+// No 'robotic language' is used here.
+message HumanSpeechRequest {
+    string action_uuid = 1;
+    Robot robot_id = 2;
+    string script = 3;
+}
+
+/////////////////////////////
+// Image Generation
+/////////////////////////////
+
+enum GenerationType {
+    TXT2IMG = 0;
+    IMG2IMG = 1;
+    FAKE2IMG = 2;
+}
+
+message ImageGeneration {
+    string action_uuid = 1;
+    int64 timestamp = 2;
+    string prompt = 3;
+    GenerationType generation_type = 4;
+    bytes context_image = 5;
+}
+
+/////////////////////////////
+// Light Command
+/////////////////////////////
+
+enum Color {
+  TRANSPARENT = 0;
+  GRAY = 1;
+  WHITE = 2;
+  BLUE = 3;
+  INTENSE_BLUE = 4;
+  GREEN = 5;
+  INTENSE_GREEN = 6;
+  RED = 7;
+  INTENSE_RED = 8;
+}
+
+message StaticAnimation {
+  Color color = 1;
+  float in_transition_duration = 2;  // in seconds
+}
+
+message FillCircleAnimation {
+  Color primary_color = 1;
+  Color secondary_color = 2;
+  float in_transition_duration = 3;  // in seconds
+
+  float fill_duration = 4; // in seconds
+}
+
+message LightCommand {
+  oneof animation {
+    StaticAnimation static_animation = 1;
+    FillCircleAnimation fill_circle_animation = 2;
+  }
+}
+
+/////////////////////////////
+// Ping/Pong
+/////////////////////////////
+
+message Ping {
+  string ping_id = 1;
+  string content = 2;
+}
+
+message Pong {
+  string ping_id = 1;
+}
+
+//////////////////////////////////
+// Common Types
+//////////////////////////////////
+
+// 2D position in space
+message Position2D {
+    float x = 1;
+    float y = 2;
+}
+
+//////////////////////////////////
+// Procedural Animations
+//////////////////////////////////
+
+// NOTE: We can add more types here as we need them.
+enum ProceduralType {
+    LOOK_AT = 0;
+    TRACK = 1;
+}
+
+enum ProceduralState {
+    START = 0;
+    UPDATE = 1;
+    PAUSE = 2;
+    STOP = 3;
+}
+
+// Main message for procedural animation control and updates.
+message ProceduralClip {
+    Robot robot_id = 1;
+    string action_uuid = 2;
+    int64 timestamp = 3;
+    ProceduralType type = 4;
+    ProceduralState state = 5;
+
+    oneof action {
+        ProceduralClipStart start = 6;
+        ProceduralClipStop stop = 7;
+        ProceduralClipUpdate update = 8;
+        ProceduralClipPause pause = 9;
+    }
+}
+
+// Start a new procedural animation
+message ProceduralClipStart {
+    optional float blend_in_duration = 1;
+    optional float volume = 2;
+
+    // Animation-specific parameters
+    // NOTE: add more if other type of animations need them
+    oneof animation_parameters {
+        LookAtParameters look_at_parameters = 3;
+        TrackParameters track_parameters = 4;
+    }
+}
+
+// Stop a procedural animation
+message ProceduralClipStop {
+    optional float blend_out_duration = 1;
+}
+
+// Pause a procedural animation
+message ProceduralClipPause {
+    bool enable = 1; // true if we pause the clip, false otherwise
+}
+
+// Update parameters for an active procedural animation
+message ProceduralClipUpdate {
+    ClipData clip = 1;
+}
+
+//////////////////////////////////
+// Animation-Specific Parameters
+//////////////////////////////////
+
+// Parameters for LOOK_AT animation
+message LookAtParameters {
+    float start_body_angle = 1; // start body angle
+
+    oneof target {
+        Position2D target_position = 2; // target as a 2D position
+        float target_body_angle = 3; // target as a body angle
+    }
+
+    float duration = 4; // seconds to reach the target
+}
+
+// Parameters for TRACK animation
+message TrackParameters {
+    // NOTE: 0.0 <= slow_distance_threshold < fast_distance_threshold <= 1.0
+    float slow_mode_distance_threshold = 1; // Distance from center to enable slow tracking mode (0.0 - 1.0)
+    float fast_mode_distance_threshold = 2; // Distance from center to enable fast tracking mode (must be > slow mode, 0.0 - 1.0)
+    float slow_speed = 3; // speed to move when the user between slow and fast distance thresholds
+    float fast_speed = 4; // speed to move when the user is beyond the fast distance threshold
+}
+
+/////////////////////////////
+// Remote Control
+/////////////////////////////
+
+message RemoteControlCommand {
+  string command = 1;
+}
+
+/////////////////////////////
+// Robot
+/////////////////////////////
+
+enum Robot {
+  RESEARCHER = 0;
+}
+
+/////////////////////////////
+// Robot Frame
+/////////////////////////////
+
+message RobotFrame {
+    Robot robot_id = 1;
+    AnimationFrame frame = 2;
+    int64 timestamp = 3; // in milliseconds
+}
+
+/////////////////////////////
+// Robot Speech Request
+/////////////////////////////
+
+message RobotSpeechRequest {
+    string script = 1;
+    Robot robot_id = 2;
+    optional float word_speed_range = 3;
+    optional float pitch_shift = 4;
+    optional float skip_chance = 5;
+}
+
+/////////////////////////////
+// Service Command
+/////////////////////////////
+
+enum Service {
+  TRACKER = 0;
+  AGENT = 1;
+  STT = 2;
+  COMPOSITOR = 3;
+}
+
+enum Command {
+  ENABLE = 0;
+  DISABLE = 1;
+  RESTART = 2;
+}
+
+message ServiceCommand {
+  Command command = 1;
+  Service target_service = 2;
+}
+
+/////////////////////////////
+// Tool Status
+/////////////////////////////
+
+message ToolStatus {
+    enum Status {
+      TOOL_CALL_STARTED = 0;
+      TOOL_CALL_COMPLETED = 1;
+      TOOL_CALL_FAILED = 2;
+      TOOL_CALL_PROCESSED = 3;
+    }
+
+    Robot robot_id = 1;
+    string action_uuid = 2;
+    int64 timestamp = 3;
+    Status status = 4;
+    string name = 5;
+    map<string, google.protobuf.Value> input = 6;
+    string response = 7;
+}
+
+/////////////////////////////
+// User Detection
+/////////////////////////////
+
+message Keypoint {
+    float x = 1;
+    float y = 2;
+    float confidence = 3;
+}
+
+message Skeleton {
+    repeated Keypoint keypoints = 1;
+}
+
+message UserDetection {
+    Robot robot_id = 1;
+    repeated BoundingBox bounding_boxes = 2;
+    repeated Skeleton skeletons = 3;
+    int32 marker_id = 4; // The index of the bounding box to be tracked
+    int32 user_id = 5;
+}
+
+/////////////////////////////
+// User State
+/////////////////////////////
+
+enum PresenceStatus {
+    USER_APPEARED = 0;
+    USER_DISAPPEARED = 1;
+}
+
+message UserState {
+    Robot robot_id = 1;
+    int32 user_id = 2;
+    int64 timestamp = 3;
+    PresenceStatus status = 4;
+}
+
+/////////////////////////////
+// User Tracking Status
+/////////////////////////////
+
+enum TrackingStatus {
+    USER_CENTERED = 0;
+    USER_NOT_CENTERED = 1;
+}
+
+message UserTrackingStatus {
+    string action_uuid = 1;
+    Robot robot_id = 2;
+    int64 timestamp = 3;
+    TrackingStatus status = 4;
+}
+
+/////////////////////////////
+// User Utterance
+/////////////////////////////
+
+enum UserUtteranceStatus {
+  USER_UTTERANCE_STARTED = 0;
+  USER_UTTERANCE_UPDATED = 1;
+  USER_UTTERANCE_FINISHED = 2;
+}
+
+message UserUtterance {
+  string action_uuid = 1;
+  UserUtteranceStatus status = 2;
+  int64 timestamp = 3;
+  string text = 4;
+}

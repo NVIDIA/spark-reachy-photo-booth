@@ -1,0 +1,100 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+# NOTE: to add robot utterances for new tools or others, add the tool name to the yaml file and add the 'started' and 'completed' messages.
+wake_up:
+    - "Let me get ready!"
+    - "Rise and shine!"
+    - "Give me a second to get my bearings straight."
+    - "Is it morning already?"
+    - "Powering up now!"
+    - "Someone wants my attention."
+    - "I love the smell of fresh code in the morning."
+    - "Initializing adorableness."
+    - "Power nom nom nominal!"
+    - "I sense a disturbance in the Force... Who poked me?"
+    - "Hello, world!"
+    - "be_awesome.exe up and running."
+    - "It's dangerous to go alone - that's why I'm here."
+    - "I was dreaming of a white rabbit..."
+    - "Thankfully I never get up on the wrong foot."
+    - "Probability of a fun CES... 100%."
+    - "I've got a good feeling about this!"
+
+look_at_human:
+  started:
+    - "Cool! Now let me work my magic and take your picture. Strike a pose and stay still."
+    - "Alright, I'll do a little magic and snap your photo. Give me your best pose and hold still for me!"
+    - "Awesome! Let me capture your image—show me your coolest pose and stay still for a moment."
+    - "Perfect! Strike your best pose and stay still while I work my magic."
+    - "Great! Give me a fabulous pose and hold it steady while I create your picture."
+    - "Fantastic! I'll wave my wand and take your photo—strike a pose and freeze!"
+    - "Wonderful, time for a little magic! Show me your favorite pose and hold perfectly still."
+    - "Ready? Strike a pose, say cheese, and hold that look!"
+  completed:
+    - "That picture turned out amazing!"
+    - "You absolutely rocked that photo!"
+    - "Nice pose! The photo came out great."
+    - "Wow, you really shine in this one!"
+    - "Awesome shot. You nailed it!"
+    - "That came out fantastic!"
+    - "Looking sharp! This one's a keeper."
+    - "What a fantastic photo of you!"
+
+generate_image:
+  completed:
+    - "All done with the image!"
+    - "Image's ready!"
+    - "Finished the image."
+    - "The image is done!"
+    - "Image complete!"
+    - "That's it for the image."
+    - "Your image is finished."
+    - "Done with the image!"
+
+qr_code_preparation:
+    - "QR code incoming. Get your phone ready!"
+    - "Ready your camera to scan and claim your masterpiece!"
+    - "An image is coming. Scan the QR code when you see it!"
+    - "Almost ready! Have your phone out to scan the QR code."
+    - "Get your phone ready! The QR code will appear any second now."
+    - "Stay sharp, your code for the art drop is almost here!"
+    - "Open your camera. QR code scan time is almost here!"
+    - "Get set to scan a QR code and grab your art soon!"
+
+demo_information:
+  performance:
+    - "So many AI models are running on the DGX Spark!"
+    - "My little golden box is a DGX Spark, and my AI models run on it!"
+    - "DGX Spark is in charge!"
+    - "I can make images and talk to you in real time thanks to DGX Spark."
+    - "See this little golden box? That's my DGX Spark, my AI brains live in there!"
+    - "DGX Spark powers my AI and animations at the same time."
+    - "I move, talk, and create images, and it all happens on the DGX Spark."
+    - "Pretty cool, right? This adorable golden box is a DGX Spark, small package, huge AI power!"
+    - "This precious little gold box called DGX Spark!"
+    - "Big things come in small packages, like this DGX Spark, my golden AI powerhouse!"
+    - "Every effect and image is processed through DGX Spark."
+    - "DGX Spark understands you, makes art, and animates me—all at once."
+    - "Everything: art, voices, animation. It's all DGX Spark working live."
+    - "DGX Spark controls me, makes art, and animates me. All together."
+    - "All this happens because I run locally on DGX Spark."
+  facts:
+    - "I'm conjuring your image with Flux, my magic art maker!"
+    - "Flux is my secret sauce. It's making your custom picture!"
+    - "Say hello to Flux, the wizard that turns words into art!"
+    - "Did you know? My images come from a model named Flux. Pretty cool!"
+    - "Flux spins your words into one-of-a-kind pictures!"
+
+    - "DGX Spark? It's the tiniest AI supercomputer ever! Pocket-sized power."
+    - "DGX Spark is so small it could hide on a bookshelf, but it's mighty!"
+    - "Don't tell anyone, but the DGX Spark started as a secret: Project DIGITS!"
+    - "This little marvel squeezes a full petaFLOP of AI muscle inside!"
+    - "At its heart? The GB10 Grace Blackwell Superchip. A true AI superhero!"
+
+    - "Six AI models, one DGX Spark: ASR, TTS, LLM, tracking, detection, and image generation power your photo booth experience."
+    - "Our photo booth is a six-model AI stack on DGX Spark, turning your words and moves into custom images."
+    - "DGX Spark runs the whole crew: ASR listens, the LLM thinks, TTS talks back, tracking, detection, and image gen finish the frame."
+    - "It's not just a camera, it's six ML models on DGX Spark, from speech to vision to image generation."
+    - "Six AI models live on DGX Spark, quietly choreographing your voice, movements, and final image."
+    - "Behind the booth: a DGX Spark running six models that listen, understand, follow you, and paint your picture."

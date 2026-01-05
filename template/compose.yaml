@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+services:
+  SERVICE_NAME:
+    restart: unless-stopped
+    container_name: SERVICE_NAME
+    image: SERVICE_NAME:latest
+    develop:
+      watch:
+        - action: rebuild
+          path: ./pyproject.toml
+        - action: sync+restart
+          path: ./src
+          target: /app/src
+    build:
+      context: ..
+      dockerfile: SERVICE_NAME/Dockerfile
+    environment:
+      - EXAMPLE=VALUE
+    #ports:
+    #  - 5555:5555
+    #volumes:
+    #  - ./src:/app/src
+    #configs:
+    #  - source: config_SERVICE_NAME
+    #    target: /config.yaml
+#configs:
+#  config_SERVICE_NAME:
+#    content: |
+#      my_super_field: field.

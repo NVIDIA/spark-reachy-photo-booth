@@ -1,0 +1,31 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+services:
+  animation-database:
+    restart: unless-stopped
+    container_name: animation-database
+    image: animation-database:latest
+    depends_on:
+      redpanda:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: rebuild
+          path: ./pyproject.toml
+        - action: sync+restart
+          path: ./src
+          target: /app/src
+    build:
+      context: ..
+      dockerfile: animation-database-service/Dockerfile
+    volumes:
+      - ./assets/animLibrary:/app/assets/animLibrary
+    configs:
+      - source: config_animation_database
+        target: /config.yaml
+configs:
+  config_animation_database:
+    content: |
+      audio_config:
+        sample_rate: 16000

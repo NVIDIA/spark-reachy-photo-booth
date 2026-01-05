@@ -1,0 +1,39 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+services:
+  agent:
+    restart: unless-stopped
+    container_name: agent
+    image: agent:latest
+    healthcheck:
+      test: ["CMD-SHELL", 'if stat /dev/shm/ready; then exit 0; else exit 1; fi']
+      start_period: 1m
+      start_interval: 5s
+    depends_on:
+      llm:
+        condition: service_healthy
+      image-generator:
+        condition: service_healthy
+      riva:
+        condition: service_healthy
+      redpanda:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: rebuild
+          path: ./pyproject.toml
+        - action: sync+restart
+          path: ./src
+          target: /app/src
+        - action: sync+restart
+          path: ./workflows/photo_booth_agent/src/photo_booth_agent
+          target: /app/.venv/lib/python3.12/site-packages/photo_booth_agent
+    build:
+      context: ..
+      dockerfile: agent-service/Dockerfile
+    environment:
+      - EXTERNAL_MINIO_BASE_URL=${EXTERNAL_MINIO_BASE_URL}
+
+volumes:
+  phoenix_data: {}

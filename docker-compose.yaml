@@ -1,0 +1,447 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+include:
+  # # - internal/examples/ping-pong/compose.yaml
+  # # - internal/examples/config/compose.yaml
+  - agent-service/compose.yaml
+  - animation-compositor-service/compose.yaml
+  - animation-database-service/compose.yaml
+  - camera-service/compose.yaml
+  - interaction-manager-service/compose.yaml
+  - ui-server-service/compose.yaml
+  - ui-frontend/compose.yaml
+  - remote-control-service/compose.yaml
+  - robot-controller-service/compose.yaml
+  - speech-to-text-service/compose.yaml
+  - text-to-speech-service/compose.yaml
+  - tracker-service/compose.yaml
+
+services:
+  init-volumes:
+    image: busybox:latest
+    container_name: init-volumes
+    command: sh -c "chmod -R 777 /nim && echo 'Volumes permissions configured'"
+    volumes:
+      - nim:/nim
+    restart: "no"
+
+  image-generator:
+    restart: unless-stopped
+    container_name: image-generator
+    depends_on:
+      init-volumes:
+        condition: service_completed_successfully
+    image: nvcr.io/nim/black-forest-labs/flux.1-kontext-dev:1.1.0
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8000/v1/health/ready"]
+      start_period: 2h
+      start_interval: 5s
+    environment:
+      - NIM_MODEL_PROFILE=bf2a467d95dd394e2f194467869c7952008bd9088f36e0e6984a2bed87a7874f
+      - NIM_ALLOW_UNCHECKED_GENERATION=true
+      - NGC_API_KEY=$NVIDIA_API_KEY
+      - HF_TOKEN=$HF_TOKEN
+    ports:
+      - 9090:8000
+    volumes:
+      - nim:/opt/nim/.cache
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+
+  riva:
+    restart: unless-stopped
+    container_name: riva
+    image: nvcr.io/nim/nvidia/parakeet-1-1b-ctc-en-us:1.4.0
+    depends_on:
+      init-volumes:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:9000/v1/health/ready"]
+      start_period: 2h
+      start_interval: 5s
+    environment:
+      - NIM_MODEL_PROFILE=e48ada80aead95c5fdcccc3b302d07d406d1d0b25858e4994f3cc34338002572
+      - NGC_API_KEY=$NVIDIA_API_KEY
+      - NIM_HTTP_API_PORT=9000
+      - NIM_GRPC_API_PORT=50051
+    ports:
+      - 50051:50051
+    volumes:
+      - nim:/opt/nim/.cache
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+
+  llm:
+    restart: unless-stopped
+    container_name: llm
+    image: nvcr.io/nvidia/tensorrt-llm/release:spark-single-gpu-dev
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8000/health"]
+      start_period: 2h
+      start_interval: 5s
+    ports:
+      - 8500:8000
+    environment:
+      - UVICORN_HOST=0.0.0.0
+      - MODEL_HANDLE=openai/gpt-oss-20b
+      - HF_TOKEN=${HF_TOKEN}
+      - TIKTOKEN_RS_CACHE_DIR=/etc/encodings
+      - TIKTOKEN_ENCODINGS_BASE=/etc/encodings
+    ipc: host
+    command:
+      - bash
+      - /entrypoint.sh
+    volumes:
+      - hf:/root/.cache/huggingface
+    configs:
+      - source: script_llm
+        target: /entrypoint.sh
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [ gpu ]
+
+  redpanda:
+    restart: unless-stopped
+    command:
+      - redpanda
+      - start
+      - --kafka-addr internal://0.0.0.0:9092,external://0.0.0.0:19092
+      - --advertise-kafka-addr internal://redpanda:9092,external://127.0.0.1:19092
+      - --pandaproxy-addr internal://0.0.0.0:8082,external://0.0.0.0:18082
+      - --advertise-pandaproxy-addr internal://redpanda:8082,external://127.0.0.1:18082
+      - --schema-registry-addr internal://0.0.0.0:8081,external://0.0.0.0:18081
+      - --rpc-addr redpanda:33145
+      - --advertise-rpc-addr redpanda:33145
+      - --mode dev-container
+      - --smp 1
+      - --default-log-level=info
+    image: docker.redpanda.com/redpandadata/redpanda:v25.2.1
+    healthcheck:
+      test: ["CMD-SHELL", 'if [ "$(curl -s -f http://127.0.0.1:9644/v1/status/ready)" = "{\"status\":\"ready\"}" ]; then exit 0; else exit 1; fi']
+      start_period: 1m
+      start_interval: 5s
+    container_name: redpanda
+    configs:
+      - source: redpanda
+        target: /etc/redpanda/redpanda.yaml
+    volumes:
+      - redpanda:/var/lib/redpanda/data
+    ports:
+      - 18081:18081
+      - 18082:18082
+      - 19092:19092
+      - 19644:9644
+
+  redpanda-console:
+    container_name: redpanda-console
+    restart: unless-stopped
+    image: docker.redpanda.com/redpandadata/console:v3.1.3
+    entrypoint: /bin/sh
+    command: -c 'echo "$$CONSOLE_CONFIG_FILE" > /tmp/config.yml; /app/console'
+    environment:
+      CONFIG_FILEPATH: /tmp/config.yml
+      CONSOLE_CONFIG_FILE: |
+        kafka:
+          brokers: ["redpanda:9092"]
+        schemaRegistry:
+          enabled: true
+          urls: ["http://redpanda:8081"]
+        redpanda:
+          adminApi:
+            enabled: true
+            urls: ["http://redpanda:9644"]
+        serde:
+          protobuf:
+            enabled: true
+            mappings:
+            - topicName: tool_status
+              valueProtoType: workmesh.messages.ToolStatus
+            - topicName: animation_frame_out
+              valueProtoType: workmesh.messages.RobotFrame
+            - topicName: camera_frame
+              valueProtoType: workmesh.messages.Frame
+            - topicName: change_volume
+              valueProtoType: workmesh.messages.ChangeVolume
+            - topicName: clip_data
+              valueProtoType: workmesh.messages.ClipData
+            - topicName: clip_status
+              valueProtoType: workmesh.messages.ClipStatus
+            - topicName: file_publish
+              valueProtoType: workmesh.messages.FilePublish
+            - topicName: human_speech_request
+              valueProtoType: workmesh.messages.HumanSpeechRequest
+            - topicName: image_generation
+              valueProtoType: workmesh.messages.ImageGeneration
+            - topicName: light_command
+              valueProtoType: workmesh.messages.LightCommand
+            - topicName: ping
+              valueProtoType: workmesh.messages.Ping
+            - topicName: play_clip
+              valueProtoType: workmesh.messages.PlayClip
+            - topicName: pong
+              valueProtoType: workmesh.messages.Pong
+            - topicName: procedural_clip
+              valueProtoType: workmesh.messages.ProceduralClip
+            - topicName: processed_doa
+              valueProtoType: workmesh.messages.ProcessedDoA
+            - topicName: realtime_doa
+              valueProtoType: workmesh.messages.RealtimeDoA
+            - topicName: remote_control_command
+              valueProtoType: workmesh.messages.RemoteControlCommand
+            - topicName: robot_frame
+              valueProtoType: workmesh.messages.RobotFrame
+            - topicName: robot_speech_request
+              valueProtoType: workmesh.messages.RobotSpeechRequest
+            - topicName: stop_clip
+              valueProtoType: workmesh.messages.StopClip
+            - topicName: service_command
+              valueProtoType: workmesh.messages.ServiceCommand
+            - topicName: routed_user_utterance
+              valueProtoType: workmesh.messages.UserUtterance
+            - topicName: user_detection
+              valueProtoType: workmesh.messages.UserDetection
+            - topicName: user_state
+              valueProtoType: workmesh.messages.UserState
+            - topicName: user_tracking
+              valueProtoType: workmesh.messages.UserTracking
+            - topicName: user_utterance
+              valueProtoType: workmesh.messages.UserUtterance
+            fileSystem:
+              enabled: true
+              refreshInterval: 15s
+              paths:
+                - /etc/protos
+    ports:
+      - 8080:8080
+    volumes:
+      - ./workmesh/src/workmesh/messages:/etc/protos
+    depends_on:
+      - redpanda
+
+  phoenix:
+    image: arizephoenix/phoenix:latest
+    container_name: phoenix
+    restart: unless-stopped
+    ports:
+      - 6006:6006
+    environment:
+      - PHOENIX_ENDPOINT=http://localhost:6006/v1/traces
+      - PHOENIX_PROJECT=nat-agent
+    volumes:
+      - phoenix_data:/root/.phoenix
+
+
+  lgtm-otel:
+    container_name: lgtm-otel
+    restart: unless-stopped
+    image: docker.io/grafana/otel-lgtm:latest
+    configs:
+      - source: otel
+        target: /otel-lgtm/otelcol-config.yaml
+    ports:
+      - 3000:3000
+      - 4317:4317
+    volumes:
+      - grafana:/data/grafana
+      - prometheus:/data/prometheus
+      - loki:/data/loki
+
+  minio:
+    container_name: minio
+    image: minio/minio:RELEASE.2025-02-28T09-55-16Z
+    environment:
+    # add default values for minio root user and password
+      MINIO_ROOT_USER: ${MINIO_ROOT_USER:-minioadmin}
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:-minioadmin}
+    ports:
+      - "9011:9011"
+      - "9010:9010"
+    volumes:
+      - minio:/minio_data
+    command: minio server /minio_data --console-address ":9011" --address ":9010"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9010/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+volumes:
+  cache: {}
+  grafana: {}
+  hf: {}
+  loki: {}
+  minio: {}
+  nim: {}
+  phoenix_data: {}
+  prometheus: {}
+  redpanda: {}
+
+configs:
+  redpanda:
+    content: |
+      redpanda:
+        data_directory: /var/lib/redpanda/data
+        seed_servers: []
+        rpc_server:
+            address: redpanda
+            port: 33145
+        kafka_api:
+            - address: 0.0.0.0
+              port: 9092
+              name: internal
+            - address: 0.0.0.0
+              port: 19092
+              name: external
+        admin:
+            - address: 0.0.0.0
+              port: 9644
+        advertised_rpc_api:
+            address: redpanda
+            port: 33145
+        advertised_kafka_api:
+            - address: redpanda
+              port: 9092
+              name: internal
+            - address: 127.0.0.1
+              port: 19092
+              name: external
+        developer_mode: true
+        auto_create_topics_enabled: true
+        fetch_reads_debounce_timeout: 10
+        group_initial_rebalance_delay: 0
+        group_topic_partitions: 3
+        log_segment_size_min: 1
+        storage_min_free_bytes: 10485760
+        topic_partitions_per_shard: 1000
+        write_caching_default: "true"
+        kafka_batch_max_bytes: 1000048576
+        retention_bytes: 10000048576
+      rpk:
+          overprovisioned: true
+          coredump_dir: /var/lib/redpanda/coredump
+      pandaproxy:
+          pandaproxy_api:
+              - address: 0.0.0.0
+                port: 8082
+                name: internal
+              - address: 0.0.0.0
+                port: 18082
+                name: external
+          advertised_pandaproxy_api:
+              - address: redpanda
+                port: 8082
+                name: internal
+              - address: 127.0.0.1
+                port: 18082
+                name: external
+      schema_registry:
+          schema_registry_api:
+              - address: 0.0.0.0
+                port: 8081
+                name: internal
+              - address: 0.0.0.0
+                port: 18081
+                name: external
+
+  script_llm:
+    content: |
+      #!/bin/sh
+      set -xe
+      mkdir -p /etc/encodings
+      cd /etc/encodings
+      wget https://openaipublic.blob.core.windows.net/encodings/o200k_base.tiktoken
+      wget https://openaipublic.blob.core.windows.net/encodings/cl100k_base.tiktoken
+      trtllm-serve "openai/gpt-oss-20b" --host 0.0.0.0 --max_batch_size 64 --trust_remote_code
+  otel:
+    content: |
+      receivers:
+        otlp:
+          protocols:
+            grpc:
+              endpoint: 0.0.0.0:4317
+            http:
+              endpoint: 0.0.0.0:4318
+              cors:
+                allowed_origins:
+                  - http://*
+        prometheus/collector:
+          config:
+            scrape_configs:
+              - job_name: "opentelemetry-collector"
+                scrape_interval: 1s
+                static_configs:
+                  - targets: ["127.0.0.1:8888"]
+              - job_name: "redpanda"
+                scrape_interval: 10s
+                static_configs:
+                  - targets: ["redpanda:9644"]
+                metrics_path: /public_metrics
+
+      extensions:
+        health_check:
+          endpoint: 0.0.0.0:13133
+          path: "/ready"
+
+      processors:
+        batch:
+
+      exporters:
+        otlphttp/metrics:
+          endpoint: http://127.0.0.1:9090/api/v1/otlp
+          tls:
+            insecure: true
+        otlphttp/traces:
+          endpoint: http://127.0.0.1:4418
+          tls:
+            insecure: true
+        otlphttp/logs:
+          endpoint: http://127.0.0.1:3100/otlp
+          tls:
+            insecure: true
+        otlp/profiles:
+          endpoint: http://127.0.0.1:4040
+          tls:
+            insecure: true
+        debug/metrics:
+          verbosity: detailed
+        debug/traces:
+          verbosity: detailed
+        debug/logs:
+          verbosity: detailed
+
+      service:
+        extensions: [health_check]
+        pipelines:
+          traces:
+            receivers: [otlp]
+            processors: [batch]
+            exporters: [otlphttp/traces]
+            #exporters: [otlphttp/traces,debug/traces]
+          metrics:
+            receivers: [otlp, prometheus/collector]
+            processors: [batch]
+            exporters: [otlphttp/metrics]
+            #exporters: [otlphttp/metrics,debug/metrics]
+          logs:
+            receivers: [otlp]
+            processors: [batch]
+            exporters: [otlphttp/logs]
+            #exporters: [otlphttp/logs,debug/logs]
+          profiles:
+            receivers: [otlp]
+            exporters: [otlp/profiles]

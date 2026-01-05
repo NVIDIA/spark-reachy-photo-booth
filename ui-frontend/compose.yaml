@@ -1,0 +1,24 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+services:
+  ui:
+    restart: unless-stopped
+    container_name: ui
+    image: ui:latest
+    depends_on:
+      agent:
+        condition: service_healthy
+    build:
+      context: ..
+      dockerfile: ui-frontend/Dockerfile
+      args:
+        - VITE_UI_SERVER_WS_URL=ws://127.0.0.1:9000/ws
+        - VITE_VIDEO_WIDTH=1920
+        - VITE_VIDEO_HEIGHT=1080
+    ports:
+      - "3001:80"
+    develop:
+      watch:
+        - action: rebuild
+          path: .

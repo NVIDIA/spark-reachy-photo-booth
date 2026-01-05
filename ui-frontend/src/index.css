@@ -1,0 +1,38 @@
+/**
+ * Copyright 2025 NVIDIA Corporation
+ * SPDX-License-Identifier: Apache-2.0
+ */
+
+@import "tailwindcss";
+
+@keyframes floatUp {
+  0% {
+    transform: translateY(120vh);
+  }
+  13.7% {
+    transform: translateY(-120vh);
+  }
+  100% {
+    transform: translateY(-120vh);
+  }
+}
+
+.animate-float-up {
+  animation: floatUp 256s linear infinite both;
+}
+
+@keyframes scrollTranscript {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(min(0px, calc(-100% + 3.6em)));
+  }
+}
+
+.animate-scroll-transcript {
+  animation-name: scrollTranscript;
+  animation-timing-function: linear;
+  animation-fill-mode: forwards;
+  animation-delay: 2s;
+}

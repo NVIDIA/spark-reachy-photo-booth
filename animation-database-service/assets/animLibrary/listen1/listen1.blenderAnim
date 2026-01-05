@@ -1,0 +1,1314 @@
+{
+  "format_version": "1.0",
+  "action_name": "listen1_action",
+  "fcurves": [
+    {
+      "bone_name": "head_env",
+      "property": "location",
+      "array_index": 1,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.0,
+            0.0
+          ],
+          "handle_right": [
+            2.0,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "R_antenna_env",
+      "property": "rotation_euler",
+      "array_index": 0,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.6666666269302368,
+            0.0
+          ],
+          "handle_right": [
+            1.3333333730697632,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "R_antenna_env",
+      "property": "rotation_euler",
+      "array_index": 1,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.6666666269302368,
+            0.0
+          ],
+          "handle_right": [
+            1.3333333730697632,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "R_antenna_env",
+      "property": "rotation_euler",
+      "array_index": 2,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.001745329238474369,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.0,
+            0.001745329238474369
+          ],
+          "handle_right": [
+            88.66666412353516,
+            0.001745329238474369
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 264.0,
+          "value": 0.001745329238474369,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            176.33331298828125,
+            0.001745329238474369
+          ],
+          "handle_right": [
+            264.33331298828125,
+            0.001745329238474369
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        }
+      ]
+    },
+    {
+      "bone_name": "R_antenna_env",
+      "property": "location",
+      "array_index": 0,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.6666666269302368,
+            0.0
+          ],
+          "handle_right": [
+            1.3333333730697632,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "R_antenna_env",
+      "property": "location",
+      "array_index": 1,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.6666666269302368,
+            0.0
+          ],
+          "handle_right": [
+            1.3333333730697632,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "R_antenna_env",
+      "property": "location",
+      "array_index": 2,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.6666666269302368,
+            0.0
+          ],
+          "handle_right": [
+            1.3333333730697632,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "L_antenna_env",
+      "property": "rotation_euler",
+      "array_index": 0,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.6666666269302368,
+            0.0
+          ],
+          "handle_right": [
+            1.3333333730697632,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "L_antenna_env",
+      "property": "rotation_euler",
+      "array_index": 1,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.6666666269302368,
+            0.0
+          ],
+          "handle_right": [
+            1.3333333730697632,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "L_antenna_env",
+      "property": "rotation_euler",
+      "array_index": 2,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.001745329238474369,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            -0.6666666269302368,
+            0.001745329238474369
+          ],
+          "handle_right": [
+            88.0,
+            0.001745329238474369
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 262.0,
+          "value": 0.001745329238474369,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            175.0,
+            0.001745329238474369
+          ],
+          "handle_right": [
+            262.33331298828125,
+            0.001745329238474369
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        }
+      ]
+    },
+    {
+      "bone_name": "L_antenna_env",
+      "property": "location",
+      "array_index": 0,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.6666666269302368,
+            0.0
+          ],
+          "handle_right": [
+            1.3333333730697632,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "L_antenna_env",
+      "property": "location",
+      "array_index": 1,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.6666666269302368,
+            0.0
+          ],
+          "handle_right": [
+            1.3333333730697632,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "L_antenna_env",
+      "property": "location",
+      "array_index": 2,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.6666666269302368,
+            0.0
+          ],
+          "handle_right": [
+            1.3333333730697632,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "head_env",
+      "property": "rotation_euler",
+      "array_index": 0,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.05235987901687622,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            -0.33333349227905273,
+            0.05124187842011452
+          ],
+          "handle_right": [
+            2.333332061767578,
+            0.053477879613637924
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 5.0,
+          "value": 0.05365254357457161,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            3.666667938232422,
+            0.0536339245736599
+          ],
+          "handle_right": [
+            7.333332061767578,
+            0.053685128688812256
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 12.0,
+          "value": 0.052316199988126755,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            9.666667938232422,
+            0.05329682677984238
+          ],
+          "handle_right": [
+            13.0,
+            0.051895931363105774
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 15.0,
+          "value": 0.05095544829964638,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            14.0,
+            0.051366887986660004
+          ],
+          "handle_right": [
+            16.333335876464844,
+            0.050406862050294876
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 19.0,
+          "value": 0.04934835433959961,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            17.666664123535156,
+            0.05006733536720276
+          ],
+          "handle_right": [
+            20.0,
+            0.04880911856889725
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 22.0,
+          "value": 0.04738485440611839,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            21.0,
+            0.04805641621351242
+          ],
+          "handle_right": [
+            24.0,
+            0.04604173079133034
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 28.0,
+          "value": 0.04470449313521385,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            26.0,
+            0.04502314329147339
+          ],
+          "handle_right": [
+            29.33333396911621,
+            0.04449205845594406
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 32.0,
+          "value": 0.04465368390083313,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            30.66666603088379,
+            0.04459071904420853
+          ],
+          "handle_right": [
+            34.33333206176758,
+            0.044763870537281036
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 39.0,
+          "value": 0.04630100354552269,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            36.66666793823242,
+            0.044764723628759384
+          ],
+          "handle_right": [
+            40.66666793823242,
+            0.04739834740757942
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 44.0,
+          "value": 0.050685688853263855,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            42.33333206176758,
+            0.049279067665338516
+          ],
+          "handle_right": [
+            44.66666793823242,
+            0.05124833807349205
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 46.0,
+          "value": 0.05243838578462601,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            45.33333206176758,
+            0.051735129207372665
+          ],
+          "handle_right": [
+            46.66666793823242,
+            0.05314164236187935
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 48.0,
+          "value": 0.05465509369969368,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            47.33333206176758,
+            0.05406135320663452
+          ],
+          "handle_right": [
+            50.33333206176758,
+            0.056733179837465286
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 55.0,
+          "value": 0.05520575866103172,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            52.66666793823242,
+            0.054818157106637955
+          ],
+          "handle_right": [
+            58.66666793823242,
+            0.055814847350120544
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 66.0,
+          "value": 0.05619004741311073,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            62.33333206176758,
+            0.062110044062137604
+          ],
+          "handle_right": [
+            66.33333587646484,
+            0.05565186217427254
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 67.0,
+          "value": 0.05442795902490616,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            66.66666412353516,
+            0.05501273274421692
+          ],
+          "handle_right": [
+            69.0,
+            0.050919342786073685
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 73.0,
+          "value": 0.04810051992535591,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            71.0,
+            0.04936784878373146
+          ],
+          "handle_right": [
+            74.0,
+            0.04746685549616814
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 76.0,
+          "value": 0.046560484915971756,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            75.0,
+            0.046904224902391434
+          ],
+          "handle_right": [
+            80.0,
+            0.045185524970293045
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 88.0,
+          "value": 0.04767800495028496,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            84.0,
+            0.047312866896390915
+          ],
+          "handle_right": [
+            90.33333587646484,
+            0.047891002148389816
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 95.0,
+          "value": 0.04881073534488678,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            92.66666412353516,
+            0.04750439524650574
+          ],
+          "handle_right": [
+            96.0,
+            0.04937059432268143
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 98.0,
+          "value": 0.05092640966176987,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            97.0,
+            0.05024141073226929
+          ],
+          "handle_right": [
+            99.66666412353516,
+            0.0520680733025074
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 103.0,
+          "value": 0.05406036227941513,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            101.33333587646484,
+            0.05269358307123184
+          ],
+          "handle_right": [
+            104.33333587646484,
+            0.05515379086136818
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 107.0,
+          "value": 0.05716985836625099,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            105.66666412353516,
+            0.056721627712249756
+          ],
+          "handle_right": [
+            110.0,
+            0.0581783764064312
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 116.0,
+          "value": 0.05306240916252136,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            113.0,
+            0.0535188764333725
+          ],
+          "handle_right": [
+            118.14955139160156,
+            0.0527353435754776
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 120.0,
+          "value": 0.05235987901687622,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            92.90963745117188,
+            0.055380720645189285
+          ],
+          "handle_right": [
+            121.66668701171875,
+            0.0522938147187233
+          ],
+          "handle_left_type": "FREE",
+          "handle_right_type": "FREE"
+        },
+        {
+          "frame": 125.0,
+          "value": 0.0774957537651062,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            123.33331298828125,
+            0.0774957537651062
+          ],
+          "handle_right": [
+            127.6670913696289,
+            0.0774957537651062
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 133.0,
+          "value": -0.06492782384157181,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            130.33291625976562,
+            -0.06492782384157181
+          ],
+          "handle_right": [
+            134.33334350585938,
+            -0.06492782384157181
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 137.0,
+          "value": -0.05235987901687622,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            135.6666717529297,
+            -0.05532294511795044
+          ],
+          "handle_right": [
+            138.0,
+            -0.05013757944107056
+          ],
+          "handle_left_type": "AUTO",
+          "handle_right_type": "AUTO"
+        },
+        {
+          "frame": 140.0,
+          "value": -0.05283031240105629,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            139.0,
+            -0.05165131017565727
+          ],
+          "handle_right": [
+            141.0,
+            -0.05400931462645531
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 143.0,
+          "value": -0.05287647619843483,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            142.0,
+            -0.05305301398038864
+          ],
+          "handle_right": [
+            144.0,
+            -0.05269993841648102
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 146.0,
+          "value": -0.05305219814181328,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            145.0,
+            -0.053303178399801254
+          ],
+          "handle_right": [
+            146.6666717529297,
+            -0.05288487672805786
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 148.0,
+          "value": -0.051688507199287415,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            147.3333282470703,
+            -0.05233791097998619
+          ],
+          "handle_right": [
+            150.3333282470703,
+            -0.04941561445593834
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 155.0,
+          "value": -0.04518519714474678,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            152.6666717529297,
+            -0.04588805139064789
+          ],
+          "handle_right": [
+            156.0,
+            -0.04488397389650345
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 158.0,
+          "value": -0.04528487101197243,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            157.0,
+            -0.0451015830039978
+          ],
+          "handle_right": [
+            160.3333282470703,
+            -0.04571254178881645
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 165.0,
+          "value": -0.04729915037751198,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            162.6666717529297,
+            -0.045953284949064255
+          ],
+          "handle_right": [
+            166.3333282470703,
+            -0.04806821420788765
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 169.0,
+          "value": -0.050310567021369934,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            167.6666717529297,
+            -0.04919813945889473
+          ],
+          "handle_right": [
+            170.6666717529297,
+            -0.05170110985636711
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 174.0,
+          "value": -0.0542617030441761,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            172.3333282470703,
+            -0.05306430906057358
+          ],
+          "handle_right": [
+            176.0,
+            -0.05569856986403465
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 180.0,
+          "value": -0.057716965675354004,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            178.0,
+            -0.05689669027924538
+          ],
+          "handle_right": [
+            180.3333282470703,
+            -0.05785367637872696
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 181.0,
+          "value": -0.058059465140104294,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            180.6666717529297,
+            -0.05797990784049034
+          ],
+          "handle_right": [
+            182.3333282470703,
+            -0.0583776980638504
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 185.0,
+          "value": -0.05784580484032631,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            183.6666717529297,
+            -0.05794953182339668
+          ],
+          "handle_right": [
+            186.3333282470703,
+            -0.057742077857255936
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 189.0,
+          "value": -0.05799667909741402,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            187.6666717529297,
+            -0.0579628050327301
+          ],
+          "handle_right": [
+            192.6666717529297,
+            -0.058089833706617355
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 200.0,
+          "value": -0.054914042353630066,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            196.3333282470703,
+            -0.056769661605358124
+          ],
+          "handle_right": [
+            202.0,
+            -0.05390188843011856
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 206.0,
+          "value": -0.05146525800228119,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            204.0,
+            -0.052730411291122437
+          ],
+          "handle_right": [
+            207.3333282470703,
+            -0.05062182620167732
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 210.0,
+          "value": -0.049191344529390335,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            208.6666717529297,
+            -0.04973674565553665
+          ],
+          "handle_right": [
+            212.6666717529297,
+            -0.048100534826517105
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 218.0,
+          "value": -0.04952755570411682,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            215.3333282470703,
+            -0.04836837202310562
+          ],
+          "handle_right": [
+            220.0,
+            -0.05039694160223007
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 224.0,
+          "value": -0.052203744649887085,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            222.0,
+            -0.05176769942045212
+          ],
+          "handle_right": [
+            226.3333282470703,
+            -0.05271246284246445
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 231.0,
+          "value": -0.054218780249357224,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            228.6666717529297,
+            -0.0519489049911499
+          ],
+          "handle_right": [
+            232.6666717529297,
+            -0.05584012717008591
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 236.0,
+          "value": -0.05462038516998291,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            234.3333282470703,
+            -0.059009116142988205
+          ],
+          "handle_right": [
+            237.3333282470703,
+            -0.051109425723552704
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 240.0,
+          "value": -0.05235987901687622,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            238.6666717529297,
+            -0.04752771183848381
+          ],
+          "handle_right": [
+            241.6666717529297,
+            -0.05840008705854416
+          ],
+          "handle_left_type": "AUTO",
+          "handle_right_type": "AUTO"
+        },
+        {
+          "frame": 245.0,
+          "value": -0.07758694142103195,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            243.33331298828125,
+            -0.07758694142103195
+          ],
+          "handle_right": [
+            247.66708374023438,
+            -0.07758694142103195
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 253.0,
+          "value": 0.06483664363622665,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            250.33291625976562,
+            0.06483664363622665
+          ],
+          "handle_right": [
+            254.33334350585938,
+            0.06483664363622665
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        },
+        {
+          "frame": 257.0,
+          "value": 0.05235987901687622,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            255.66665649414062,
+            0.05235987901687622
+          ],
+          "handle_right": [
+            257.33331298828125,
+            0.05235987901687622
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        }
+      ]
+    },
+    {
+      "bone_name": "head_env",
+      "property": "location",
+      "array_index": 0,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 1.3013122081756592,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            -11.399999618530273,
+            1.3013122081756592
+          ],
+          "handle_right": [
+            13.233332633972168,
+            1.3013122081756592
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        }
+      ]
+    },
+    {
+      "bone_name": "head_env",
+      "property": "location",
+      "array_index": 2,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.34451067447662354,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            -11.433332443237305,
+            0.34451067447662354
+          ],
+          "handle_right": [
+            12.933332443237305,
+            0.34451067447662354
+          ],
+          "handle_left_type": "ALIGNED",
+          "handle_right_type": "ALIGNED"
+        }
+      ]
+    },
+    {
+      "bone_name": "head_env",
+      "property": "rotation_euler",
+      "array_index": 1,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.0,
+            0.0
+          ],
+          "handle_right": [
+            2.0,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "head_env",
+      "property": "rotation_euler",
+      "array_index": 2,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.0,
+            0.0
+          ],
+          "handle_right": [
+            2.0,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "base_env",
+      "property": "rotation_euler",
+      "array_index": 0,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.6666666269302368,
+            0.0
+          ],
+          "handle_right": [
+            1.3333333730697632,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "base_env",
+      "property": "rotation_euler",
+      "array_index": 1,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.6666666269302368,
+            0.0
+          ],
+          "handle_right": [
+            1.3333333730697632,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "base_env",
+      "property": "rotation_euler",
+      "array_index": 2,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.6666666269302368,
+            0.0
+          ],
+          "handle_right": [
+            1.3333333730697632,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "base_env",
+      "property": "location",
+      "array_index": 0,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.6666666269302368,
+            0.0
+          ],
+          "handle_right": [
+            1.3333333730697632,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "base_env",
+      "property": "location",
+      "array_index": 1,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.6666666269302368,
+            0.0
+          ],
+          "handle_right": [
+            1.3333333730697632,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    },
+    {
+      "bone_name": "base_env",
+      "property": "location",
+      "array_index": 2,
+      "keyframes": [
+        {
+          "frame": 1.0,
+          "value": 0.0,
+          "interpolation": "BEZIER",
+          "handle_left": [
+            0.6666666269302368,
+            0.0
+          ],
+          "handle_right": [
+            1.3333333730697632,
+            0.0
+          ],
+          "handle_left_type": "AUTO_CLAMPED",
+          "handle_right_type": "AUTO_CLAMPED"
+        }
+      ]
+    }
+  ]
+}

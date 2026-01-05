@@ -1,0 +1,45 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+services:
+  speech-to-text:
+    restart: unless-stopped
+    container_name: speech-to-text
+    image: speech-to-text:latest
+    depends_on:
+      riva:
+        condition: service_healthy
+      redpanda:
+        condition: service_healthy
+    develop:
+      watch:
+        - action: rebuild
+          path: ./pyproject.toml
+        - action: sync+restart
+          path: ./src
+          target: /app/src
+    build:
+      context: ..
+      dockerfile: speech-to-text-service/Dockerfile
+    devices:
+      - /dev/snd:/dev/snd # Audio devices
+    volumes:
+      - /run/user/1000/pulse:/run/user/1000/pulse
+      - /run/user/1000/pulse/native:/run/user/1000/pulse/native
+      - /run/user/1000/pipewire-0:/run/user/1000/pipewire-0
+      - /run/user/1000/pipewire-0.lock:/run/user/1000/pipewire-0.lock
+      - /run/user/1000/pipewire-0-manager:/run/user/1000/pipewire-0-manager
+      - /run/user/1000/pipewire-0-manager.lock:/run/user/1000/pipewire-0-manager.lock
+    environment:
+      - XDG_RUNTIME_DIR=/run/user/1000
+      - PULSE_SERVER=unix:/run/user/1000/pulse/native
+    #configs:
+    #  - source: config_speech_to_text
+    #    target: /config.yaml
+
+#configs:
+#  config_speech_to_text:
+#    content: |
+#      input_device_index_or_name: ["<your_input_device_index_or_name>"]  # e.g., 11 or "C922 Pro Stream Webcam: USB Audio (hw:3,0)"
+#      audio_config:
+#        sample_rate: <your_device_sample_rate>  # e.g., 16000, 22050, 44100, or 48000

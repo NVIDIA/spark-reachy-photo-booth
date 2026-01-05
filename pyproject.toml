@@ -1,0 +1,118 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+[project]
+name = "spark-reachy-photo-booth"
+version = "0.1.0"
+description = "Spark & Reachy Photo Booth project"
+readme = "README.md"
+license = "Apache-2.0"
+requires-python = ">=3.12"
+
+[tool.uv.workspace]
+members = [
+    "agent-service",
+    "agent-service/workflows/photo_booth_agent",
+    "animation-compositor-service",
+    "animation-database-service",
+    "camera-service",
+    "interaction-manager-service",
+    "metrics-service",
+    "remote-control-service",
+    "robot-controller-service",
+    "speech-to-text-service",
+    "tests",
+    "text-to-speech-service",
+    "tracker-service",
+    "ui-server-service",
+    "workmesh",
+]
+
+[tool.setuptools]
+py-modules = []
+
+[tool.ruff.format]
+line-ending = "lf"
+
+[tool.ruff.lint]
+select = [
+    # pycodestyle
+    "E",
+    # Pyflakes
+    "F",
+    # pyupgrade
+    "UP",
+    # flake8-bugbear
+    "B",
+    # flake8-simplify
+    "SIM",
+    # isort
+    "I",
+]
+
+[tool.ruff]
+exclude = [
+    "*_pb2.py",
+    "*.pyi",
+    "tracker-service/deps/**",
+]
+
+[tool.pyright]
+ignore = [
+    "workmesh/src/workmesh/messages/*.pyi",
+    "internal/"
+]
+
+[dependency-groups]
+dev = [
+    "pyright>=1.1.403",
+    "ruff==0.14.8",
+]
+
+[tool.uv]
+package = false
+environments = [
+    "sys_platform == 'linux' and platform_machine == 'x86_64'",
+    "sys_platform == 'linux' and platform_machine == 'aarch64'",
+]
+override-dependencies = [
+    "grpcio>=1.75.1",
+]
+
+[tool.uv.extra-build-dependencies]
+detectron2 = ["torch"]
+yolox = ["torch"]
+
+
+[tool.uv.sources]
+torch = [
+  { index = "pytorch-cpu", marker = "sys_platform != 'linux'" },
+  { index = "pytorch-cu", marker = "sys_platform == 'linux'" },
+]
+torchvision = [
+  { index = "pytorch-cpu", marker = "sys_platform != 'linux'" },
+  { index = "pytorch-cu", marker = "sys_platform == 'linux'" },
+]
+nvidia-nccl-cu13 = [
+  { index = "pytorch-cpu", marker = "sys_platform != 'linux'" },
+  { index = "pytorch-cu", marker = "sys_platform == 'linux'" },
+]
+torchaudio = [
+  { index = "pytorch-cpu", marker = "sys_platform != 'linux'" },
+  { index = "pytorch-cu", marker = "sys_platform == 'linux'" },
+]
+pytorch-triton = [
+  { index = "pytorch-cpu", marker = "sys_platform != 'linux'" },
+  { index = "pytorch-cu", marker = "sys_platform == 'linux'" },
+]
+
+
+[[tool.uv.index]]
+name = "pytorch-cu"
+url = "https://download.pytorch.org/whl/cu130"
+explicit = true
+
+[[tool.uv.index]]
+name = "pytorch-cpu"
+url = "https://download.pytorch.org/whl/cpu"
+explicit = true

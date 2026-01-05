@@ -1,0 +1,33 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+services:
+  interaction-manager:
+    restart: unless-stopped
+    container_name: interaction-manager
+    image: interaction-manager:latest
+    develop:
+      watch:
+        - action: rebuild
+          path: ./pyproject.toml
+        - action: sync+restart
+          path: ./src
+          target: /app/src
+    build:
+      context: ..
+      dockerfile: interaction-manager-service/Dockerfile
+    depends_on:
+      robot-controller:
+        condition: service_healthy
+      redpanda:
+        condition: service_healthy
+      agent:
+        condition: service_healthy
+    configs:
+      - source: config_interaction_manager
+        target: /config.yaml
+
+configs:
+  config_interaction_manager:
+    content: |
+      offset_type: earliest

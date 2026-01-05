@@ -1,0 +1,21 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+[project]
+name = "animation-database"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=1.26.4",
+    "opentelemetry-exporter-otlp-proto-grpc>=1.15.0",
+    "pydub>=0.25.1",
+    "workmesh",
+]
+
+[tool.uv.sources]
+workmesh = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "typer>=0.16.1",
+]

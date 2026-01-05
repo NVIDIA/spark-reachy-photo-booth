@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+services:
+  metrics:
+    restart: unless-stopped
+    container_name: metrics
+    image: metrics:latest
+    develop:
+      watch:
+        - action: rebuild
+          path: ./pyproject.toml
+        - action: sync+restart
+          path: ./src
+          target: /app/src
+    build:
+      context: ..
+      dockerfile: metrics-service/Dockerfile
+    #configs:
+    #  - source: config_metrics
+    #    target: /config.yaml
+#configs:
+#  config_metrics:
+#    content: |
+#      my_super_field: field.

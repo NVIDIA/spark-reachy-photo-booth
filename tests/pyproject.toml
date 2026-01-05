@@ -1,0 +1,20 @@
+# Copyright 2025 NVIDIA Corporation
+# SPDX-License-Identifier: Apache-2.0
+
+[project]
+name = "tests"
+version = "0.1.0"
+description = "Integration tests for Spark & Reachy Photo Booth services"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "pytest>=8.4.2",
+    "pytest-asyncio>=0.24.0",
+    "pytest-timeout>=2.3.1",
+    "pytest-cov>=6.0.0",
+    "coverage[toml]>=7.6.0",
+    "workmesh",
+]
+
+[tool.uv.sources]
+workmesh = { workspace = true }

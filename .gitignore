@@ -1,0 +1,20 @@
+.idea/
+*.egg-info
+.python3
+__pycache__
+.tmp/
+.venv/
+.direnv/
+.envrc
+.gitattributes
+
+# Environment variables
+.env
+
+docker-compose.override.yaml
+
+*_output.json
+
+assets/*
+!assets/.gitkeep
+logs/

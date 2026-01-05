@@ -1,0 +1,73 @@
+{
+  "editor.trimAutoWhitespace": true,
+  "editor.tabSize": 2,
+
+  "files.trimTrailingWhitespace": true,
+
+  "[yaml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "[yml]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml"
+  },
+
+  "[proto]": {
+    "editor.defaultFormatter": "zxh404.vscode-proto3"
+  },
+
+  "[python]": {
+    "editor.defaultFormatter": "charliermarsh.ruff",
+    "editor.codeActionsOnSave": {
+      "source.organizeImports": "explicit"
+    },
+    "editor.formatOnSave": true
+  },
+
+  "cSpell.words": [
+    "animationclip",
+    "animcomposer",
+    "idxs",
+    "indata",
+    "interp",
+    "keypoints",
+    "kittentts",
+    "lerp",
+    "libusb",
+    "ndarray",
+    "popleft",
+    "pyaudio",
+    "reachy",
+    "redpanda",
+    "respeaker",
+    "riva",
+    "samplerate",
+    "silero",
+    "slerp",
+    "tavely",
+    "tobytes",
+    "workmesh"
+  ],
+
+  // Note: You might have to run the "Developer: Restart Extension Host" VS Code command to reload the configuration
+  "evenBetterToml.formatter.arrayAutoExpand": false,
+  "evenBetterToml.formatter.arrayAutoCollapse": false,
+  "evenBetterToml.formatter.columnWidth": 80,
+  "evenBetterToml.formatter.trailingNewline": true,
+  "evenBetterToml.formatter.allowedBlankLines": 2,
+  "evenBetterToml.formatter.arrayTrailingComma": true,
+
+  // Used to assign keyboard shortcuts
+  "launches": {
+    "Build app": "Build app",
+    "Run app": "Run app"
+  }
+}

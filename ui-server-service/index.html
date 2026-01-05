@@ -1,0 +1,28 @@
+<!--
+ Copyright 2025 NVIDIA Corporation
+ SPDX-License-Identifier: Apache-2.0
+-->
+
+<video id="video" autoplay="true" playsinline="true" muted></video>
+
+<script>
+  let websocket = new WebSocket("http://localhost:9000/ws")
+  let rtcPeerConnection = new RTCPeerConnection({
+    iceServers: []
+  });
+
+  rtcPeerConnection.ontrack = (ev) => {
+    console.log("Video!")
+    const video = document.getElementById("video");
+    video.srcObject = ev.streams[0];
+  }
+  websocket.onmessage = (async (ev) => {
+    const data = JSON.parse(ev.data);
+    await rtcPeerConnection.setRemoteDescription(data)
+    const answer = await rtcPeerConnection.createAnswer()
+    await rtcPeerConnection.setLocalDescription(answer);
+    const message = {message_type: "Signalling", sdp: rtcPeerConnection.localDescription.sdp, type: rtcPeerConnection.localDescription.type};
+    console.log(message)
+    websocket.send(JSON.stringify(message))
+  })
+</script>

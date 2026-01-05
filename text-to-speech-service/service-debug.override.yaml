@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+services:
+  text-to-speech:
+    command:
+      - /bin/sleep infinity
+    volumes:
+      - ./text-to-speech-service/src:/app/src

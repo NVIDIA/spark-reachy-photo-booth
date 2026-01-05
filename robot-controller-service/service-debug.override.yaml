@@ -1,0 +1,9 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+services:
+  robot-controller:
+    command:
+      - /bin/sleep infinity
+    volumes:
+      - ./robot-controller-service/src:/app/src

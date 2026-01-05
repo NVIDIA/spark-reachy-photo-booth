@@ -1,0 +1,25 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+[project]
+name = "camera"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "workmesh",
+    "pyudev>=0.24.1",
+    "setuptools>=78.1.0",
+    "opencv-python-headless>=4.11.0.86",
+    "aiohttp",
+    "requests",
+]
+
+[project.optional-dependencies]
+scripts = [
+    "Flask>=3.0.0",
+    "Flask-CORS>=4.0.0",
+    "opencv-python-headless>=4.11.0.86",
+]
+
+[tool.uv.sources]
+workmesh = { workspace = true }

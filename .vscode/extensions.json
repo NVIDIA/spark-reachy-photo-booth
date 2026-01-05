@@ -1,0 +1,12 @@
+{
+  "recommendations": [
+    "arturodent.launch-config",
+    "charliermarsh.ruff",
+    "drblury.protobuf-vsc",
+    "esbenp.prettier-vscode",
+    "humao.rest-client",
+    "mikestead.dotenv",
+    "ms-azuretools.vscode-containers",
+    "tamasfe.even-better-toml"
+  ]
+}

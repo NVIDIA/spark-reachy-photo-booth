@@ -1,0 +1,22 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+[project]
+name = "text-to-speech"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "kokoro>=0.9.4",
+    "pip>=25.2",
+    "pydantic>=2.10.6",
+    "pydub>=0.25.1",
+    "soundfile>=0.13.1",
+    "torch>=2.9.0",
+    "torchaudio>=2.9.0",
+    "torchvision>=0.24.0",
+    "workmesh",
+]
+
+[tool.uv.sources]
+workmesh = { workspace = true }
+kokoro = { git = "https://github.com/NVIDIA/kokoro" }

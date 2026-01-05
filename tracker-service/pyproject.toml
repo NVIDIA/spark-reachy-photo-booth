@@ -1,0 +1,29 @@
+# SPDX-FileCopyrightText: Copyright (c) 2025 NVIDIA CORPORATION & AFFILIATES. All rights reserved.
+# SPDX-License-Identifier: Apache-2.0
+
+[project]
+name = "tracker"
+version = "0.1.0"
+requires-python = "<3.13"
+dependencies = [
+    "workmesh",
+    "requests>=2.32.4",
+    "opencv-python-headless>=4.11.0.86",
+    "statesman>=1.0.5",
+    "transformers==4.49.0",
+    "supervision>=0.26.1",
+    "yolox",
+    "loguru>=0.7.3",
+    "cython-bbox>=0.1.5",
+    "thop>=0.1.1.post2209072238",
+    "lap>=0.5.12",
+    "detectron2",
+    "scipy==1.15.3",
+    "torch==2.9.0",
+    "torchvision>=0.24.0",
+]
+
+[tool.uv.sources]
+workmesh = { workspace = true }
+detectron2 = { git = "https://github.com/facebookresearch/detectron2.git" }
+yolox = { git = "https://github.com/FoundationVision/ByteTrack.git", rev = "main" }
